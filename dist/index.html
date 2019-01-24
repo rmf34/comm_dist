@@ -2,7 +2,7 @@
 <html lang='en-US'>
 
 <head>
-    <title>CommutePro | HOME</title>
+    <title>Commute | HOME</title>
     <link href='https://fonts.googleapis.com/css?family=IBM+Plex+Sans:600' rel='stylesheet'>
     <link rel='icon' src="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4HwAA4AcAAMPDAACP8QAAn/kAAB/4AAA//AAAPgQAAD4EAAA+fAAAHngAAJ55AACOcQAAw8MAAOAHAAD4HwAA" />
     <meta charset='utf-8'>
@@ -16,7 +16,7 @@
     <!-- imessage rich preview -->
 <!-- https://richpreview.com/?url=https%3A%2F%2Frmf34.github.io%2Fcommutes%2F -->
 <meta property='og:type' content='website' />
-<meta property='og:title' content="CommutePro - For CTA 'L' Riders" />
+<meta property='og:title' content="Commute - For CTA 'L' Riders" />
 <meta property='og:description' content="Train arrival data and commute planning for Chicago's CTA 'L' Train System">
 <!-- TODO: add url -->
 <meta property='og:url' content='' />
@@ -28,7 +28,7 @@
       // TODO: will update data but don't want to make too many calls
       // setTimeout('location.reload(true);', 30000);
     </script>
-<link href="styles.297f80711221b791c84e.css" rel="stylesheet"></head>
+<link href="styles.11b134b8bcfc1a1c4391.css" rel="stylesheet"></head>
 
 <body>
     <img class='loading-gif fixed' id='loading-spinner' src="train-loader-01.0a8c0157ad6a144a1318.gif" />
@@ -36,7 +36,7 @@
 
         <header>
   <div class='header-wrapper'>
-    <span class='brand-callout'>CommutePro - For CTA 'L' Riders</span>
+    <span class='brand-callout'>Commute - For CTA 'L' Riders</span>
     <span class='switch switch-horizontal hidden'>
       <input id='radio-am' type='radio' name='am-pm' checked='checked'>
       <label for='radio-am'>AM</label>
@@ -152,11 +152,16 @@
             </div>
 
             <div class='all-data-am hidden'>
+                <span class='station-setting departure'>
+                    <input id='am-station-search' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change AM Station' autocomplete='off' />
+                </span>
+                <span class='station-setting destination hidden'>
+                    <input id='am-destination-station' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change AM Destination' autocomplete='off' />
+                </span>
                 <div class='trainData-am'>
                     <h2 class='am-commute-station-label'></h2>
-                    <input id='am-station-search' class='awesomplete' spellcheck='false' type='text' placeholder='Change AM Station'
-                        autocomplete='off' />
-                    <select title='Filter by Line' class='settings am-train-filter hidden'>
+                    <h2 class='am-destination-station-label hidden'></h2>
+                    <select title='Filter by Line' class='settings am-train-filter hidden select-filter'>
                         <option value='all'>All lines</option>
                     </select>
                 </div>
@@ -168,11 +173,16 @@
                 </div>
             </div>
             <div class='all-data-pm hidden'>
+                <span class='station-setting departure'>
+                    <input id='pm-station-search' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change PM Station' autocomplete='off' />
+                </span>
+                <span class='station-setting destination hidden'>
+                    <input id='pm-destination-station' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change PM Destination' autocomplete='off' />
+                </span>
                 <div class='trainData-pm'>
                     <h2 class='pm-commute-station-label'></h2>
-                    <input id='pm-station-search' class='awesomplete' spellcheck='false' type='text' placeholder='Change PM Station'
-                        autocomplete='off' />
-                    <select title='Filter by Line' class='settings pm-train-filter hidden'>
+                    <h2 class='pm-destination-station-label hidden'></h2>
+                    <select title='Filter by Line' class='settings pm-train-filter hidden select-filter'>
                         <option value='all'>All lines</option>
                     </select>
                 </div>
@@ -211,7 +221,7 @@
 
         </div>
     </div>
-<script type="text/javascript" src="main.c35ab2322a143a344701.js"></script></body>
+<script type="text/javascript" src="main.91b665d84358e3283235.js"></script></body>
 
 <script>
     // NOTE: handle no internet
