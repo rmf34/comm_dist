@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./page-how-it-works/main.js"],"names":["require"],"mappings":"2FAAAA,EAAQ,QACRA,EAAQ","file":"how.9488c5c9.js","sourcesContent":["require('normalize.css/normalize.css');\nrequire('./page.css');\n"],"sourceRoot":""}
