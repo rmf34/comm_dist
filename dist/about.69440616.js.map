@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./page-about/main.js"],"names":["require"],"mappings":"kHAAAA,EAAQ,QACRA,EAAQ","file":"about.69440616.js","sourcesContent":["require('normalize.css/normalize.css');\nrequire('./page.css');\n\n"],"sourceRoot":""}
