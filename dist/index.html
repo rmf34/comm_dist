@@ -41,7 +41,7 @@
             left: 45%;
         }
     </style>
-<link href="0.styles.70423ad93b3d203a9467.css" rel="stylesheet"><link href="8.styles.95af8188eb1a69d01362.css" rel="stylesheet"><link href="5.styles.161c79af31ee710a9d7d.css" rel="stylesheet"><link href="2.styles.352555564dd60d5df6ee.css" rel="stylesheet"><link href="4.styles.c18e82f066f987f84afe.css" rel="stylesheet"></head>
+<link href="0.styles.70423ad93b3d203a9467.css" rel="stylesheet"><link href="8.styles.95af8188eb1a69d01362.css" rel="stylesheet"><link href="5.styles.cc22584e272edc4d5aa2.css" rel="stylesheet"><link href="2.styles.352555564dd60d5df6ee.css" rel="stylesheet"><link href="4.styles.c18e82f066f987f84afe.css" rel="stylesheet"></head>
 
 <body>
     <img class='loading-gif' id='loading-spinner' src="train-loader-01.0a8c0157ad6a144a1318.gif" />
@@ -62,32 +62,16 @@
         <span class='sf-with-ul'>Settings</span>
         <ul>
           <li class='checkbox-setting'>
-            <input class='settings ios8-switch' id='trainHeading' type='checkbox' name='Train Heading'>
-            <label for='trainHeading' class='settings'>Train Heading</label>
+            <input class='settings ios8-switch' id='weatherSetting' type='checkbox' name='Show Weather'>
+            <label for='weatherSetting' class='settings'>Show Weather</label>
           </li>
           <li class='checkbox-setting'>
-            <input type='checkbox' class='settings ios8-switch' id='trainConfidence' name='Confidence Score'>
-            <label for='trainConfidence' class='settings'>Confidence Score</label>
-          </li>
-          <li class='checkbox-setting'>
-            <input class='settings ios8-switch' id='predictionDiff' type='checkbox' name='Prediction Diff'>
-            <label for='predictionDiff' class='settings'>Prediction Diff</label>
-          </li>
-          <li class='checkbox-setting'>
-            <input class='settings ios8-switch' id='trainRunNumber' type='checkbox' name='Run Number'>
-            <label for='trainRunNumber' class='settings'>Run Number</label>
-          </li>
-          <li class='checkbox-setting'>
-            <input class='settings ios8-switch' id='routeName' type='checkbox' name='Route Name'>
-            <label for='routeName' class='settings'>Route Name</label>
-          </li>
-          <li class='checkbox-setting'>
-            <input class='settings ios8-switch' id='alertDetails' type='checkbox' name='Alert Details'>
-            <label for='alertDetails' class='settings'>Alert Details</label>
+            <input class='settings ios8-switch' id='detailViewSetting' type='checkbox' name='Enable Detail View'>
+            <label for='detailViewSetting' class='settings'>Enable Detail View</label>
           </li>
           <li class='checkbox-setting'>
             <input class='settings ios8-switch' id='accessibilitySetting' type='checkbox' name='Show Accessibility'>
-            <label for='accessibilitySetting' class='settings'>Accessibility</label>
+            <label for='accessibilitySetting' class='settings'>Accessibility Alerts</label>
           </li>
 
           <li class='alert-threshold-container'>
@@ -116,8 +100,8 @@
                 <span class='out-selector'>
                   <span class='plain-selector'>
                     <select class='settings arrival-time-pad ios-style-dropdown'>
-                      <option value='0'>Pad Arrival (sec)</option>
-                      <option value='0'>0</option>
+                      <!-- <option value='0' disabled='true'>Pad Arrival (sec)</option> -->
+                      <option value='0'>Pad Arrivals 0 (sec)</option>
                       <option value='15'>15</option>
                       <option value='30'>30</option>
                       <option value='45'>45</option>
@@ -128,6 +112,26 @@
               </div>
             </div>
           </li>
+
+          <li class='forecast-lookahead-container'>
+            <div class='outer-selection'>
+              <div class='selection'>
+                <span class='out-selector'>
+                  <span class='plain-selector'>
+                    <select class='settings weather-forecast-lookahead ios-style-dropdown'>
+                      <option disabled='true'>Weather For</option>
+                      <option value='24'>1 Day</option>
+                      <option value='48'>2 Days</option>
+                      <option value='72'>3 Days</option>
+                      <option value='96'>4 Days</option>
+                      <option value='120'>5 Days</option>
+                    </select>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </li>
+
           <li>
             <span class='settings reset-muted-alerts'>Reset Alerts</span>
           </li>
@@ -168,7 +172,10 @@
                     </div>
                 </div>
 
-                <div class='weather-data-container hidden'></div>
+                <div class='weather-data-all'>
+                    <div class='left'></div>
+                    <div class='weather-data-container current'></div>
+                </div>
 
                 <div class='all-data-am hidden'>
                     <span class='station-setting departure'>
@@ -235,7 +242,7 @@
     </ul>
     <div class='footer-callout'>
       CTA Train Tracker (SM) logo icon is a trademark of the Chicago Transit Authority.
-      <a href='https://www.transitchicago.com/developers/' target='_blank'> Data provided by the CTA</a>
+      <a href='https://www.transitchicago.com/developers/' target='_blank'> Transit Data provided by the CTA</a>
     </div>
   </div>
 </footer>
@@ -248,7 +255,7 @@
             <ul class='ride-history-list'></ul>
         </div>
     </div>
-<script type="text/javascript" src="runtime.0c2850c2.js"></script><script type="text/javascript" src="npm.normalize.css.308ae30f.js"></script><script type="text/javascript" src="vendor.c464d85f.js"></script><script type="text/javascript" src="cta-data.2043bc47.js"></script><script type="text/javascript" src="npm.jquery.b17e9e9f.js"></script><script type="text/javascript" src="npm.webpack.26ff78f6.js"></script><script type="text/javascript" src="main.e34a2868.js"></script><script type="text/javascript" src="about.a52bffe4.js"></script><script type="text/javascript" src="how.141eac60.js"></script></body>
+<script type="text/javascript" src="runtime.0c2850c2.js"></script><script type="text/javascript" src="npm.normalize.css.308ae30f.js"></script><script type="text/javascript" src="vendor.c464d85f.js"></script><script type="text/javascript" src="cta-data.2043bc47.js"></script><script type="text/javascript" src="npm.jquery.b17e9e9f.js"></script><script type="text/javascript" src="npm.webpack.26ff78f6.js"></script><script type="text/javascript" src="main.4dc391ae.js"></script><script type="text/javascript" src="about.a52bffe4.js"></script><script type="text/javascript" src="how.141eac60.js"></script></body>
 
 <script>
     // NOTE: handle no internet
