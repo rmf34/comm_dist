@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+
+<head>
+    <title>Commute | HOME</title>
+    <link href='https://fonts.googleapis.com/css?family=IBM+Plex+Sans:600' rel='stylesheet'>
+    <link rel='icon' src="data:image/vnd.microsoft.icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4HwAA4AcAAMPDAACP8QAAn/kAAB/4AAA//AAAPgQAAD4EAAA+fAAAHngAAJ55AACOcQAAw8MAAOAHAAD4HwAA" />
+    <meta charset='utf-8'>
+<meta name='description' content='Unofficial Commute optimizer for Chicago Transit Authority L Trains' />
+<meta name='keywords' content='CTA, Commute, Optimizer, Chicago Transit Authority, L Train, Unofficial, Chicago, El Train, El Line, The L' />
+<meta name='author' content='CommutePro' />
+<meta name='robots' content='NONE' />
+
+
+    <!-- TODO: fix imessage rich preview URL -->
+    <!-- imessage rich preview -->
+<!-- https://richpreview.com/?url=https%3A%2F%2Frmf34.github.io%2Fcommutes%2F -->
+<meta property='og:type' content='website' />
+<meta property='og:title' content="Commute - For CTA 'L' Riders" />
+<meta property='og:description' content="Train arrival data and commute planning for Chicago's CTA 'L' Train System">
+<!-- TODO: add url -->
+<meta property='og:url' content='' />
+<meta property='og:image:height' content='1068' />
+<meta property='og:image:width' content='543' />
+
+    <meta property='og:image' content="og.7c408d02e3742ecee588.png" src="og.7c408d02e3742ecee588.png" />
+    <!-- FOUC PROTECTION: -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .body-wrapper {
+            visibility: hidden;
+            opacity: 0;
+        }
+        img.loading-gif {
+            position: relative;
+            top: 395px;
+            z-index: 100;
+            left: 45%;
+        }
+    </style>
+<link rel="shortcut icon" href="favicon.ico"><link href="0.styles.70423ad93b3d203a9467.css" rel="stylesheet"><link href="8.styles.95af8188eb1a69d01362.css" rel="stylesheet"><link href="5.styles.d327ef73c3bb8f6820ce.css" rel="stylesheet"><link href="2.styles.352555564dd60d5df6ee.css" rel="stylesheet"><link href="4.styles.c18e82f066f987f84afe.css" rel="stylesheet"></head>
+
+<body>
+    <img class='loading-gif' id='loading-spinner' src="train-loader-01.fdf8cc9dfc8641f37d37.gif" />
+    <div class='body-wrapper noselect'>
+        <div class='overlay-wrapper'>
+
+            <header>
+  <div class='header-wrapper'>
+    <span class='brand-callout'>Commute - For CTA 'L' Riders</span>
+    <span class='switch switch-horizontal hidden'>
+      <input id='radio-am' type='radio' name='am-pm' checked='checked'>
+      <label for='radio-am'>AM</label>
+      <input id='radio-pm' type='radio' name='am-pm'>
+      <label for='radio-pm'>PM</label><span class='toggle-outside'><span class='toggle-inside'></span></span>
+    </span>
+    <ul class='sf-menu settings' id='settings-menu'>
+      <li class='current'>
+        <span class='sf-with-ul'>Settings</span>
+        <ul class='settings-inner-ul'>
+          <li class='checkbox-setting'>
+            <input class='settings ios8-switch' id='weatherSetting' type='checkbox' name='Show Weather'>
+            <label for='weatherSetting' class='settings'>Show Weather</label>
+          </li>
+          <li class='checkbox-setting'>
+            <input class='settings ios8-switch' id='detailViewSetting' type='checkbox' name='Enable Detail View'>
+            <label for='detailViewSetting' class='settings'>Enable Detail View</label>
+          </li>
+          <li class='checkbox-setting'>
+            <input class='settings ios8-switch' id='accessibilitySetting' type='checkbox' name='Show Accessibility'>
+            <label for='accessibilitySetting' class='settings'>Accessibility Alerts</label>
+          </li>
+
+          <li class='alert-threshold-container'>
+            <div class='outer-selection'>
+              <div class='selection'>
+                <span class='out-selector'>
+                  <span class='plain-selector'>
+                    <select class='settings alert-threshold ios-style-dropdown'>
+                      <option disabled selected value>Alert Threshold</option>
+                      <option value='0'>0 - All Alerts</option>
+                      <option value='1'>1 - Info</option>
+                      <option value='2'>2 - Planned</option>
+                      <option value='3'>3 - Minor</option>
+                      <option value='4'>4 - MAJOR</option>
+                      <option value='5'>5 - SEVERE</option>
+                    </select>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </li>
+
+          <li class='pad-arrivals-container'>
+            <div class='outer-selection'>
+              <div class='selection'>
+                <span class='out-selector'>
+                  <span class='plain-selector'>
+                    <select class='settings arrival-time-pad ios-style-dropdown'>
+                      <option value='0'>Pad Arrivals 0 (sec)</option>
+                      <option value='15'>15</option>
+                      <option value='30'>30</option>
+                      <option value='45'>45</option>
+                      <option value='60'>60</option>
+                    </select>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <span class='settings reset-muted-alerts'>Reset Alerts</span>
+          </li>
+          <li class='reset-commute'>
+            <span class='settings reset-commute'>Reset Commute</span>
+          </li>
+          <li>
+            <span class='ride-history-trigger'><a href='#ride-history-modal' rel='modal:open'>Ride History</a></span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</header>
+
+
+            <div class='boarded-wrapper hidden fixed-element'>
+                <div class='boarded-status'>
+                    <span>Riding: </span>
+                    <span class='boarded-line-name'></span>
+                    <span class='boarded-run-number'></span>
+                    <span>to </span>
+                    <span class='boarded-destination-station'></span>
+                    <span>&#8212; </span>
+                    <span class='eta-boarded'></span>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgpMwidZAAAB70lEQVRYCe2WW44TQQxFw2MPwAJgJfyxTkCMRrwkWAzhK6yCx4jxUdeRbkrpSdVHkp9YclfZvr6ucj+qN5urXDtw4Q48Gaz/qHCnwA6Vf9yhWMya9LE+dy1v1f+0RV7U+KZU+xCxPjBgyUHMWayJq4mvKudn6f/Sr6X6LViujXNiYMBuS8lFzFmsgauEEPwqhfB3G7/X6PMATiw+Yondle0ixJXrYfE+PisYu4Dwbxv/tPFbjUnIHB9YMeb8KB9ciNyLtXKV+HXFk5B52hRU+uI9Fi5E7sUauL4vTBbtiT9UHH0I867VGdp9w+616nalwL/mp3jOczHkKlMLICnb9bFsiL2vzNG7ptqJIUdJLn1DYyZ+qgwK9LvN4sbAKsmhb2pMgreVSUF2noXTB0bJXH1741HAHnrsNZq+112NPTMX+Lki7NQ29x3IGFglOfQNjZl49ocw22hxv3DuPDuRc+Ji801IzqEOADr2IbopDJpFXaCLgGNKbP3FPsW2igOEg4Qd+QFyVyc9jGiXXXhZ810pi/A4zuLgxDJ6KIklFw5E3GINXD3zOc+3pSyC10t/Ejon9qVhybG4OeWaE/9k+L3iN0siCyabPjBgn7egHImdmktsks+Ido59rM9N7NQcYnbWFzhEMoM9lH/1nbcD9wbI07aXXJEHAAAAAElFTkSuQmCC" class='icon boarding-close-icon' />
+                </div>
+            </div>
+
+            <div class='content-wrapper'>
+                <div class='app-messages'>
+                    <!-- todo put into a messages class / helper -->
+                    <div class='hidden' id='offline-warning'>
+                        <h3>ERROR: Please check your internet connection</h3>
+                    </div>
+                    <div class='hidden' id='configure-commute' class='info-circle'>
+                        <h2>Configure Your Commute</h2>
+                    </div>
+                </div>
+
+                <div class='weather-data-all'>
+                    <div class='left'></div>
+                    <div class='weather-data-container current'></div>
+                </div>
+
+                <div class='all-data-am hidden'>
+                    <div class='station-setting-container'>
+                        <span class='station-setting departure'>
+                            <input id='am-station-search' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change AM Station' autocomplete='off' />
+                        </span>
+                        <span class='station-setting destination hidden'>
+                            <input id='am-destination-station' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change AM Destination' autocomplete='off' />
+                        </span>
+                    </div>
+                    <div class='trainData-am'>
+                        <h2 class='am-commute-station-label'></h2>
+                        <h2 class='am-destination-station-label hidden'></h2>
+                        <select title='Filter by Line' class='settings am-train-filter hidden select-filter'>
+                            <option class='train-filter-all' value='all'>All lines</option>
+                        </select>
+                    </div>
+                    <ul class='trainData-am'></ul>
+                    <ul class='routedata-am'></ul>
+                    <div class='station-alerts-am hidden'>
+                        <h2>AM Station Alerts</h2>
+                        <ul class='station-alerts-am'></ul>
+                    </div>
+                </div>
+                <div class='all-data-pm hidden'>
+                    <div class='station-setting-container'>
+                        <span class='station-setting departure'>
+                            <input id='pm-station-search' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change PM Station' autocomplete='off' />
+                        </span>
+                        <span class='station-setting destination hidden'>
+                            <input id='pm-destination-station' class='awesomplete station-setting' spellcheck='false' type='text' placeholder='Change PM Destination' autocomplete='off' />
+                        </span>
+                    </div>
+                    <div class='trainData-pm'>
+                        <h2 class='pm-commute-station-label'></h2>
+                        <h2 class='pm-destination-station-label hidden'></h2>
+                        <select title='Filter by Line' class='settings pm-train-filter hidden select-filter'>
+                            <option class='train-filter-all' value='all'>All lines</option>
+                        </select>
+                    </div>
+                    <ul class='trainData-pm'></ul>
+                    <ul class='routedata-pm'></ul>
+                    <div class='station-alerts-pm hidden'>
+                        <h2>PM Station Alerts</h2>
+                        <ul class='station-alerts-pm'></ul>
+                    </div>
+                </div>
+                <div class='configure-commute-explainer hidden'>
+                    <p class='am-explainer hidden'>First, select the station you use to head to work in the morning.</p>
+                    <p class='pm-explainer hidden'>Next select the station where you start your commute home.</p>
+                    <p class='explainer-calm'>Start by typing in the names of your stations. Don't worry, this is very easy to change later.</p>
+                </div>
+
+                <div class='all-system-alerts'>
+                    <div class='system-overall hidden'>
+                        <h2>System Overall</h2>
+                        <ul class='system-overall'></ul>
+                    </div>
+                    <div class='system-alerts hidden'>
+                        <h2>System Alerts</h2>
+                        <ul class='system-alerts'></ul>
+                    </div>
+                </div>
+                <footer class='hidden'>
+  <div class='list-container'>
+    <ul class='footer'>
+      <li><a href='index.html'>Home</a></li>
+      <li><a href='about.html'>About</a></li>
+      <li><a href='how-it-works.html'>How it Works</a></li>
+    </ul>
+    <div class='footer-callout'>
+      CTA Train Tracker (SM) logo icon is a trademark of the Chicago Transit Authority.
+      <a href='https://www.transitchicago.com/developers/' target='_blank'> Transit Data provided by the CTA</a>
+    </div>
+  </div>
+</footer>
+
+            </div>
+        </div>
+        <div id='ride-history-modal' class='modal'>
+            <h2>Ride History</h2>
+            <hr>
+            <ul class='ride-history-list'></ul>
+        </div>
+    </div>
+<script type="text/javascript" src="runtime.79ea5a71.js"></script><script type="text/javascript" src="npm.normalize.css.d2d5c8fc.js"></script><script type="text/javascript" src="vendor.49b7ebe0.js"></script><script type="text/javascript" src="cta-data.98f819fc.js"></script><script type="text/javascript" src="npm.jquery.154427d6.js"></script><script type="text/javascript" src="npm.webpack.459429fa.js"></script><script type="text/javascript" src="main.1c22d5b8.js"></script><script type="text/javascript" src="about.2377683f.js"></script><script type="text/javascript" src="how.c7061187.js"></script></body>
+
+<script>
+    // NOTE: handle no internet
+    if (navigator.onLine === false) {
+        var offLineWarning = document.getElementById('offline-warning');
+        offLineWarning.classList.remove('hidden');
+
+        var loadingSpinner = document.getElementById('arrivals-loading-spinner');
+        loadingSpinner.classList.add('hidden');
+    }
+</script>
+<!-- <style>
+  /* .body-wrapper {
+    visibility: visible;
+    opacity: 1;
+  } */
+</style>
+ -->
+
+</html>
