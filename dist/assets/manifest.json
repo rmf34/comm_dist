@@ -1,14 +1,14 @@
 {
-  "name": "my-app",
-  "short_name": "my-app",
-  "description": "My awesome App",
+  "name": "cta-app",
+  "short_name": "cta-app",
+  "description": "",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
   "orientation": "any",
   "start_url": "/?homescreen=1",
-  "background_color": "#ddd",
-  "theme_color": "#333",
+  "background_color": "#fff",
+  "theme_color": "#fff",
   "icons": [
     {
       "src": "/assets/android-chrome-36x36.png",
